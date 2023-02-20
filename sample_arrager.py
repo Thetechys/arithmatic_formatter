@@ -1,7 +1,7 @@
 q1 = ["32 + 698"] #normal problem 
 q1_1 = ["32 + 698", "3801 - 2", "45 + 43", "123 - 49"] #normal but longer problem
 q2 = ['15 + 12', '1000 - 99', '3525 + 78' , '342 + 10', '55 - 66']  #Error: Too many problems.
-q3 = ['15 + 12', '231 + 321','100 * 3'] #Error: Operator must be '+' or '-'
+q3 = ['100 * 3','15 + 12', '231 + 321'] #Error: Operator must be '+' or '-'
 q4 = ['15 + 12','yourmom + yoursis'] #Error: Numbers must only contain digits.
 q5 = ['12345 + 45678'] #Error: Numbers cannot be more than four digits.
 
@@ -31,15 +31,24 @@ def arithmetic_arranger(problem):
      for i in strip_problem: ## matching operand
 
 
-          if re.search('\+|\-',i) == None: print("Error: Operator must be '+' or '-'")
+          if re.search('\+|\-',i) == None: 
+               
+               print("Error: Operator must be '+' or '-'")
+               break
                
                
-          elif re.match('[\d]{1,4}[\+|\-][\d]{1,4}',i.replace(' ','')) == None: print("Error: Numbers cannot be more than four digits.")
-
+          elif re.match('[\d]{1,4}[\+|\-][\d]{1,4}',i.replace(' ','')) == None: 
                
-          elif len(strip_problem) > 4: print("Error: Too many problems")
+               print("Error: Numbers cannot be more than four digits.")
+               break
+
+          elif len(strip_problem) > 4: 
+               
+               print("Error: Too many problems")
+               break
 
 
+          ## check if operand isdigit()
 
 
           else:
@@ -77,7 +86,7 @@ def arranger(q):
 #arranger(myq)
 
 
-arithmetic_arranger(q3)
+#arithmetic_arranger(q3)
 
-#print(len(q1_1))
-#print(len(q2))
+
+print(myq[0].isdigit())

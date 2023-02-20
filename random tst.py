@@ -1,9 +1,9 @@
-import textwrap
 
 
+lst1 = ['dist','nutz']
+lst2 = ['dist + nutz']
 
-the_text = 'This is a sample text'
+print(' '.join(lst1))
 
-processed_txt = textwrap.indent(the_text,' '*6)
 
-print(processed_txt)
+print(lst2[0].split('+'))
