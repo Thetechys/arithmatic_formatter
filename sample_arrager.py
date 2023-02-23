@@ -28,8 +28,7 @@ def arithmetic_arranger(problem):
 
      print(strip_problem)
 
-     for i in strip_problem: ## matching operand
-
+     for i in strip_problem: 
 
           if re.search('\+|\-',i) == None: 
                
@@ -49,6 +48,10 @@ def arithmetic_arranger(problem):
 
 
           ## check if operand isdigit()
+          elif i.isdigit() == False:
+
+               print('#Error: Numbers must only contain digits.')
+               break
 
 
           else:
@@ -57,9 +60,6 @@ def arithmetic_arranger(problem):
      
     
 #     return arranged_problems
-
-#arithmetic_arranger(q1_1)
-
 
 
 mytxt = 'test'
@@ -86,7 +86,19 @@ def arranger(q):
 #arranger(myq)
 
 
-#arithmetic_arranger(q3)
+#arithmetic_arranger(q1_1)
 
 
-print(myq[0].isdigit())
+#print(myq[0].isdigit())
+
+
+def arithmetic_sampler(problem):
+
+     strip_problem = [q.replace(' ','') for q in problem]
+
+     peel_problem = [(q.replace('+','')).replace('-','') for q in problem]
+
+     print(peel_problem)
+
+
+arithmetic_sampler(q1_1)
