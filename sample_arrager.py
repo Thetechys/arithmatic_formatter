@@ -17,8 +17,6 @@ q5 = ['12345 + 45678'] #Error: Numbers cannot be more than four digits.
 '------------------------------------------------------------------------'
 
 import re
-from string import punctuation
-
 
 
 
@@ -28,51 +26,52 @@ def arithmetic_arranger(problem):
 
      print(strip_problem)
 
+     green_light = 0
+
      for i in strip_problem: 
 
           if re.search('\+|\-',i) == None: 
-               
                print("Error: Operator must be '+' or '-'")
                break
                
-               
-          elif re.match('[\d]{1,4}[\+|\-][\d]{1,4}',i.replace(' ','')) == None: 
-               
+          elif re.match('[\d]{1,4}[\+|\-][\d]{1,4}',i) == None: 
                print("Error: Numbers cannot be more than four digits.")
                break
 
           elif len(strip_problem) > 4: 
-               
                print("Error: Too many problems")
                break
 
-
-          ## check if operand isdigit()
-          elif i.isdigit() == False:
-
+          elif re.match('[\d]+[\+|\-][\d]+',strip_problem[strip_problem.index(i)]) == None:
                print('#Error: Numbers must only contain digits.')
                break
 
+          elif strip_problem.index(i) != -1 and len(strip_problem) != 1:
+               continue
 
           else:
-
                print('checked no problem')
+               green_light = 1
+
      
-    
-#     return arranged_problems
+     # if green_light == 1:
 
 
-mytxt = 'test'
+     #      for i in strip_problem:
 
-# print(mytxt)
-# print(mytxt.ljust(10,'-'))
-# print(mytxt.rjust(10))
+     #           print(i)
 
-
-myq = ["32 + 3698"]
+          #arranged_problems = [strip_problem[0][0].rjust(6),strip_problem[0][1].ljust(1),strip_problem[0][2].rjust(4)]
 
 
-def arranger(q):
+
+     #return arranged_problems
+
+
+
+
+
+def arranger(myq):
 
      pro_q = [q.split(sep=' ') for q in myq]
 
@@ -81,24 +80,84 @@ def arranger(q):
      print('------')
      #print(pro_q[0][2].rjust(6))
      # print(pro_q[0][2].rjust(5))
-     #print(pro_q)
-
-#arranger(myq)
+     print(pro_q)
 
 
-#arithmetic_arranger(q1_1)
 
 
-#print(myq[0].isdigit())
+def sampler(que):
+
+     strip_problem = [q.replace(' ','') for q in que]
+     gex = re.compile("[+\-]")
+
+     for i in strip_problem:
+
+          print(i)
+          pattern = str(re.findall(gex,i))
+          clean_data = re.split(gex, i)
+
+          print(clean_data)
+          print(pattern)
 
 
-def arithmetic_sampler(problem):
+def sampler2(que):
 
-     strip_problem = [q.replace(' ','') for q in problem]
+     strip_problem = [q.replace(' ','') for q in que]
+     gex = re.compile("[+\-]")
+     
 
-     peel_problem = [(q.replace('+','')).replace('-','') for q in problem]
+     l_operand = []
+     operator = []
+     r_operand = []
 
-     print(peel_problem)
+
+     for i in strip_problem:
+          
+          opfind = re.search('[+\-]',i)
+          split_data = re.split(gex,i)
 
 
-arithmetic_sampler(q1_1)
+          operator.append(i[opfind.start()])
+          l_operand.append(split_data[0])
+          r_operand.append(split_data[1])
+
+          
+     print(operator) ##debug
+     print(l_operand) ##debug
+     print(r_operand) ##debug
+
+
+
+
+              
+
+#sampler2(q1_1)
+
+
+
+
+
+
+os1 = '1034'
+os2 = '+'
+
+
+s0 = ['hell','asdf','qwer']
+s1 = ['+','*','-']
+s2 = ['no','yes','may']
+
+print(s0[0].rjust(5)+' '.rjust(4)+s2[0].rjust(5)+'\n'+s0[1].rjust(5)+' '.rjust(4)+s2[1].rjust(5)+'\n'+s0[2].rjust(5)+' '.rjust(4)+s2[2].rjust(5))
+# print(s0.rjust(5)+' '.rjust(4)+s2.rjust(5))
+# print(s0.rjust(5)+' '.rjust(4)+s2.rjust(5))
+
+
+
+
+j_count = 0
+j_string = str
+
+for i in s1:
+
+     j_count += 1
+     j_obj = i.ljust(1)+s2[j_count-1].rjust(5)
+     #j_string = j_string + j_obj
