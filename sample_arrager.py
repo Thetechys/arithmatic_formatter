@@ -71,33 +71,7 @@ def arithmetic_arranger(problem):
 
 
 
-def arranger(myq):
 
-     pro_q = [q.split(sep=' ') for q in myq]
-
-     print(pro_q[0][0].rjust(6))
-     print(pro_q[0][1].ljust(1),pro_q[0][2].rjust(4))
-     print('------')
-     #print(pro_q[0][2].rjust(6))
-     # print(pro_q[0][2].rjust(5))
-     print(pro_q)
-
-
-
-
-def sampler(que):
-
-     strip_problem = [q.replace(' ','') for q in que]
-     gex = re.compile("[+\-]")
-
-     for i in strip_problem:
-
-          print(i)
-          pattern = str(re.findall(gex,i))
-          clean_data = re.split(gex, i)
-
-          print(clean_data)
-          print(pattern)
 
 
 def sampler2(que):
@@ -110,28 +84,34 @@ def sampler2(que):
      operator = []
      r_operand = []
 
+     split_list = []
 
      for i in strip_problem:
           
           opfind = re.search('[+\-]',i)
           split_data = re.split(gex,i)
+          split_list += split_data
 
 
-          operator.append(i[opfind.start()])
-          l_operand.append(split_data[0])
-          r_operand.append(split_data[1])
+          print(split_list)
+
+     #      operator.append(i[opfind.start()])
+     #      l_operand.append(split_data[0])
+     #      r_operand.append(split_data[1])
 
           
-     print(operator) ##debug
-     print(l_operand) ##debug
-     print(r_operand) ##debug
+     # print(l_operand) ##debug
+     # print(operator) ##debug
+     # print(r_operand) ##debug
+
+
+#sampler2(q1_1)
 
 
 
 
               
 
-#sampler2(q1_1)
 
 
 
@@ -146,11 +126,21 @@ s0 = ['hell','asdf','qwer']
 s1 = ['+','*','-']
 s2 = ['no','yes','may']
 
-print(s0[0].rjust(5)+' '.rjust(4)+s2[0].rjust(5)+'\n'+s0[1].rjust(5)+' '.rjust(4)+s2[1].rjust(5)+'\n'+s0[2].rjust(5)+' '.rjust(4)+s2[2].rjust(5))
+myjam2 = list()
+
+myjam = s0[0].rjust(5)+' '.rjust(4)+s0[1].rjust(5)+' '.rjust(4)+s0[2].rjust(5)+'\n'
+#+s0[1].rjust(5)+' '.rjust(4)+s2[1].rjust(5)+'\n'+s0[2].rjust(5)+' '.rjust(4)+s2[2].rjust(5)
 # print(s0.rjust(5)+' '.rjust(4)+s2.rjust(5))
 # print(s0.rjust(5)+' '.rjust(4)+s2.rjust(5))
 
+#print(myjam)
 
+for i in s0:
+
+     filler = i.rjust(5)+' '.rjust(4)
+     myjam2.append(filler)
+
+#print(myjam2)
 
 
 j_count = 0
@@ -161,3 +151,18 @@ for i in s1:
      j_count += 1
      j_obj = i.ljust(1)+s2[j_count-1].rjust(5)
      #j_string = j_string + j_obj
+
+
+
+# for i in range(len(s0)):
+
+#      print(i)
+
+
+cage = ''.join([(i.rjust(6)+'    ') for i in s0])
+#cage2 = ''.join(([i.ljust(5) for i in s1]) + ([(i.ljust(5) + '    ') for i in s2]))
+cage2 = ''.join(([i.ljust(5)+([(i.ljust(5) + '    ') for i in s2]) for i in s1]))
+
+
+print(cage)
+print(cage2)
