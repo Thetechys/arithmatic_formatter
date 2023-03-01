@@ -23,12 +23,24 @@ import re
 def arithmetic_arranger(problem):
 
      strip_problem = [q.replace(' ','') for q in problem]
-
-     print(strip_problem)
-
+     pattern = re.compile("[+\-]")
+     l_operand = list()
+     operator = list()
+     r_operand = list()
+     num_l_operand = list()
+     num_r_operand = list()
+     num_answer = list()
+     breakline = list()
      green_light = 0
+     
 
-     for i in strip_problem: 
+
+     print(f'strip_problem: {strip_problem}')
+
+
+     for i in strip_problem:   ### for loop that trigger error msg if argument doesn't meet requirement
+
+          print(i)
 
           if re.search('\+|\-',i) == None: 
                print("Error: Operator must be '+' or '-'")
@@ -46,123 +58,61 @@ def arithmetic_arranger(problem):
                print('#Error: Numbers must only contain digits.')
                break
 
-          elif strip_problem.index(i) != -1 and len(strip_problem) != 1:
-               continue
-
           else:
                print('checked no problem')
                green_light = 1
 
+     print('debug level')
+
+     print('debug level')
      
-     # if green_light == 1:
-
-
-     #      for i in strip_problem:
-
-     #           print(i)
-
-          #arranged_problems = [strip_problem[0][0].rjust(6),strip_problem[0][1].ljust(1),strip_problem[0][2].rjust(4)]
-
-
-
-     #return arranged_problems
-
-
-
-
-
-
-
-
-def sampler2(que):
-
-     strip_problem = [q.replace(' ','') for q in que]
-     gex = re.compile("[+\-]")
-     
-
-     l_operand = []
-     operator = []
-     r_operand = []
-
-     split_list = []
-
-     for i in strip_problem:
-          
-          opfind = re.search('[+\-]',i)
-          split_data = re.split(gex,i)
-          split_list += split_data
-
-
-          print(split_list)
-
-     #      operator.append(i[opfind.start()])
-     #      l_operand.append(split_data[0])
-     #      r_operand.append(split_data[1])
+     if green_light == 1:
 
           
-     # print(l_operand) ##debug
-     # print(operator) ##debug
-     # print(r_operand) ##debug
+          for i in strip_problem:
+               
+               opfind = re.search('[+\-]',i)
+               split_data = re.split(pattern,i)
 
 
-#sampler2(q1_1)
+               operator.append(i[opfind.start()])   ## appending '+' and '-' into list
+               l_operand.append(split_data[0])  ## appending left operand in string type
+               num_l_operand.append(int(split_data[0])) ## convern and append left operant in int type
+               r_operand.append(split_data[1])  ## right operand in string type
+               num_r_operand.append(int(split_data[1]))  ## right operand in int type
+
+               if re.search('\+',i) != None:
+
+                    ans = int(split_data[0]).__add__(int(split_data[1]))
+                    num_answer.append(ans)
+
+               else:
+                    
+                    ans = int(split_data[0]).__sub__(int(split_data[1]))
+                    num_answer.append(ans)
 
 
+          l_concate = '    '.join([i.rjust(5) for i in l_operand])
+          r_o_concate = '    '.join([operator[i] + r_operand[i].rjust(4) for i in range(len(operator))])
+          ans_concate = '    '.join([str(num_answer[i]).rjust(5) for i in range(len(num_answer))])
+
+          for i in range(len(operator)):
+               break_len = len([r_operand[i].rjust(4) for i in range(len(operator))])
+               print(f'breaklen: {break_len}')
+               breakline.append(''.rjust(break_len+1,'-'))
+
+          
+
+          print(f'l_operand: {l_operand}')
+          print(f'r_operand: {r_operand}')
+          print(f'num_l_operand: {num_l_operand}')
+          print(f'num_r_operand: {num_r_operand}')
+          print(f'num_answer: {num_answer}')
+
+          print(l_concate)
+          print(r_o_concate)
+          print('    '.join(breakline))
+          print(ans_concate)
 
 
-              
-
-
-
-
-
-
-
-os1 = '1034'
-os2 = '+'
-
-
-s0 = ['hell','asdf','qwer']
-s1 = ['+','*','-']
-s2 = ['no','yes','may']
-
-myjam2 = list()
-
-myjam = s0[0].rjust(5)+' '.rjust(4)+s0[1].rjust(5)+' '.rjust(4)+s0[2].rjust(5)+'\n'
-#+s0[1].rjust(5)+' '.rjust(4)+s2[1].rjust(5)+'\n'+s0[2].rjust(5)+' '.rjust(4)+s2[2].rjust(5)
-# print(s0.rjust(5)+' '.rjust(4)+s2.rjust(5))
-# print(s0.rjust(5)+' '.rjust(4)+s2.rjust(5))
-
-#print(myjam)
-
-for i in s0:
-
-     filler = i.rjust(5)+' '.rjust(4)
-     myjam2.append(filler)
-
-#print(myjam2)
-
-
-j_count = 0
-j_string = str
-
-for i in s1:
-
-     j_count += 1
-     j_obj = i.ljust(1)+s2[j_count-1].rjust(5)
-     #j_string = j_string + j_obj
-
-
-
-# for i in range(len(s0)):
-
-#      print(i)
-
-
-cage = ''.join([(i.rjust(6)+'    ') for i in s0])
-#cage2 = ''.join(([i.ljust(5) for i in s1]) + ([(i.ljust(5) + '    ') for i in s2]))
-cage2 = ''.join(([i.ljust(5)+([(i.ljust(5) + '    ') for i in s2]) for i in s1]))
-
-
-print(cage)
-print(cage2)
+arithmetic_arranger(q1_1)
