@@ -19,10 +19,9 @@ q5 = ['12345 + 45678'] #Error: Numbers cannot be more than four digits.
 import re
 
 
+def arithmetic_arranger(problems):
 
-def arithmetic_arranger(problem):
-
-     strip_problem = [q.replace(' ','') for q in problem]
+     strip_problem = [q.replace(' ','') for q in problems]
      pattern = re.compile("[+\-]")
      l_operand = list()
      operator = list()
@@ -54,7 +53,7 @@ def arithmetic_arranger(problem):
                break
 
           else:
-               print('checked no problem, proceed format arrangement')
+               #print('checked no problem, proceed format arrangement')  ## debug purposes
                green_light = 1
 
      
@@ -67,7 +66,6 @@ def arithmetic_arranger(problem):
                split_data = re.split(pattern,i)
                pad_len = max(len(split_data[0]),len(split_data[1]))
                padding.append(int(pad_len))
-               print(f'debug: pad len = {pad_len}')
 
 
                operator.append(i[opfind.start()])   ## appending '+' and '-' into list
@@ -89,19 +87,20 @@ def arithmetic_arranger(problem):
 
           for i in range(len(operator)):
 
-               breakline.append(''.rjust(padding[i]+2,'-'))
+               breakline.append(''.rjust(padding[i]+2,'-')) #added 2 , one is for space btwn operator and r_operand , another is right under opertor
 
 
-          print(f'padding {padding}')
           l_concate = '    '.join([i.rjust(padding[l_operand.index(i)]+2) for i in l_operand])
           r_o_concate = '    '.join([operator[i] + r_operand[i].rjust(padding[i]+1) for i in range(len(operator))])
           ans_concate = '    '.join([str(num_answer[i]).rjust(len(breakline[i])) for i in range(len(num_answer))])
 
+          breakline = '    '.join(breakline)
 
-          print(l_concate)
-          print(r_o_concate)
-          print('    '.join(breakline))
-          print(ans_concate)
+     
+          arranged_problems = l_concate+'\n'+r_o_concate+'\n'+breakline+'\n'+ans_concate 
 
 
-arithmetic_arranger(q2)
+          return arranged_problems
+
+
+print(arithmetic_arranger(q3))
