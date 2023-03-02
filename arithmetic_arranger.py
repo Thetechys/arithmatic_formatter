@@ -2,7 +2,7 @@ import re
 
 
 
-def arithmetic_arranger(problems):
+def arithmetic_arranger(problems,*args):
 
     strip_problem = [q.replace(' ','') for q in problems]
     pattern = re.compile("[+\-]")
@@ -20,20 +20,24 @@ def arithmetic_arranger(problems):
     for i in strip_problem:   ### for loop that trigger error msg if argument doesn't meet requirement
 
         if re.search('\+|\-',i) == None: 
-            print("Error: Operator must be '+' or '-'")
-            break
+            
+            return "Error: Operator must be '+' or '-'"
+            
             
         elif re.match('[\d]{1,4}[\+|\-][\d]{1,4}',i) == None: 
-            print("Error: Numbers cannot be more than four digits.")
-            break
+            
+            return"Error: Numbers cannot be more than four digits."
+            
 
         elif len(strip_problem) > 4: 
-            print("Error: Too many problems")
-            break
+            
+            return "Error: Too many problems"
+            
 
         elif re.match('[\d]+[\+|\-][\d]+',strip_problem[strip_problem.index(i)]) == None:
-            print('#Error: Numbers must only contain digits.')
-            break
+            
+            return '#Error: Numbers must only contain digits.'
+        
 
         else:
             #print('checked no problem, proceed format arrangement')  ## debug purposes
@@ -82,4 +86,6 @@ def arithmetic_arranger(problems):
 
         arranged_problems = l_concate+'\n'+r_o_concate+'\n'+breakline+'\n'+ans_concate 
 
-        return arranged_problems
+        if args == True:
+
+            return arranged_problems
