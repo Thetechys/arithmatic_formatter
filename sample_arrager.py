@@ -31,16 +31,11 @@ def arithmetic_arranger(problem):
      num_r_operand = list()
      num_answer = list()
      breakline = list()
+     padding = list()
      green_light = 0
      
 
-
-     print(f'strip_problem: {strip_problem}')
-
-
      for i in strip_problem:   ### for loop that trigger error msg if argument doesn't meet requirement
-
-          print(i)
 
           if re.search('\+|\-',i) == None: 
                print("Error: Operator must be '+' or '-'")
@@ -59,12 +54,9 @@ def arithmetic_arranger(problem):
                break
 
           else:
-               print('checked no problem')
+               print('checked no problem, proceed format arrangement')
                green_light = 1
 
-     print('debug level')
-
-     print('debug level')
      
      if green_light == 1:
 
@@ -73,6 +65,9 @@ def arithmetic_arranger(problem):
                
                opfind = re.search('[+\-]',i)
                split_data = re.split(pattern,i)
+               pad_len = max(len(split_data[0]),len(split_data[1]))
+               padding.append(int(pad_len))
+               print(f'debug: pad len = {pad_len}')
 
 
                operator.append(i[opfind.start()])   ## appending '+' and '-' into list
@@ -92,22 +87,16 @@ def arithmetic_arranger(problem):
                     num_answer.append(ans)
 
 
-          l_concate = '    '.join([i.rjust(5) for i in l_operand])
-          r_o_concate = '    '.join([operator[i] + r_operand[i].rjust(4) for i in range(len(operator))])
-          ans_concate = '    '.join([str(num_answer[i]).rjust(5) for i in range(len(num_answer))])
-
           for i in range(len(operator)):
-               break_len = len([r_operand[i].rjust(4) for i in range(len(operator))])
-               print(f'breaklen: {break_len}')
-               breakline.append(''.rjust(break_len+1,'-'))
 
-          
+               breakline.append(''.rjust(padding[i]+2,'-'))
 
-          print(f'l_operand: {l_operand}')
-          print(f'r_operand: {r_operand}')
-          print(f'num_l_operand: {num_l_operand}')
-          print(f'num_r_operand: {num_r_operand}')
-          print(f'num_answer: {num_answer}')
+
+          print(f'padding {padding}')
+          l_concate = '    '.join([i.rjust(padding[l_operand.index(i)]+2) for i in l_operand])
+          r_o_concate = '    '.join([operator[i] + r_operand[i].rjust(padding[i]+1) for i in range(len(operator))])
+          ans_concate = '    '.join([str(num_answer[i]).rjust(len(breakline[i])) for i in range(len(num_answer))])
+
 
           print(l_concate)
           print(r_o_concate)
@@ -115,4 +104,4 @@ def arithmetic_arranger(problem):
           print(ans_concate)
 
 
-arithmetic_arranger(q1_1)
+arithmetic_arranger(q2)
