@@ -6,7 +6,6 @@ def arithmetic_arranger(problems,show=False):
 
     strip_problem = [q.replace(' ','') for q in problems]
     split_problem = [s.split() for s in problems]
-    pattern = re.compile("[+\-]")
     l_operand = list()
     operator = list()
     r_operand = list()
@@ -24,22 +23,22 @@ def arithmetic_arranger(problems,show=False):
 
         if re.search('\+|\-',i[1]) == None: 
             
-            return print("Error: Operator must be '+' or '-'.")
+            return "Error: Operator must be '+' or '-'."
             
             
         elif (len(i[0]) > 4) or (len(i[2]) > 4) : 
             
-            return print("Error: Numbers cannot be more than four digits.")
+            return "Error: Numbers cannot be more than four digits."
             
 
         elif len(strip_problem) > 5: 
             
-            return print("Error: Too many problems.")
+            return "Error: Too many problems."
             
 
         elif (i[0].isnumeric() and i[2].isnumeric()) == False:
             
-            return print("Error: Numbers must only contain digits.")
+            return "Error: Numbers must only contain digits."
         
 
         else:
@@ -55,9 +54,6 @@ def arithmetic_arranger(problems,show=False):
             
             pad_len = max(len(i[0]),len(i[2]))
             padding.append(int(pad_len))
-
-            print(f'pad len = {pad_len}')
-            print(padding)
 
 
             operator.append(i[1])   ## appending '+' and '-' into list
@@ -96,29 +92,16 @@ def arithmetic_arranger(problems,show=False):
 
         breakline = '    '.join(breakline)
 
-        print(l_operand) ## debug
-        print(r_operand)  ## debug
+
 
 
         if show == True:
 
-            arranged_problems = print(l_concate+'\n'+r_o_concate+'\n'+breakline+'\n'+ans_concate)
+            arranged_problems = l_concate+'\n'+r_o_concate+'\n'+breakline+'\n'+ans_concate
 
         else:
 
-            arranged_problems = print(l_concate+'\n'+r_o_concate+'\n'+breakline)
+            arranged_problems = l_concate+'\n'+r_o_concate+'\n'+breakline
 
 
         return arranged_problems
-    
-
-
-arithmetic_arranger(['11 + 4', '3801 - 2999', '1 + 2', '123 + 49', '1 - 9380'])
-
-## ['1 + 2', '1 - 9380']  the 2nd '1' won't align due to python though it is the 1st '1'    SOLVED
-
-## ['11 + 4', '3801 - 2999', '1 + 2', '123 + 49', '1 - 9380']   same issue as above    SOLVED
-
-## ['24 + 85215', '3801 - 2', '45 + 43', '123 + 49'] doesnt trigge error "Error: Numbers cannot be more than four digits." SOLVED
-
-## ['98 + 3g5', '3801 - 2', '45 + 43', '123 + 49'] this test triggered a python value error instead of "Error: Numbers must only contain digits."   SOLVED
