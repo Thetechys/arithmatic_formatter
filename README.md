@@ -1,6 +1,7 @@
 # arithmatic_formatter
 
-#####  CREDIT:  ####
+CREDIT:
+
 This project is one of the requirement to qualify freeCodeCamp <Scientific Computing with Python> certification
 
 
