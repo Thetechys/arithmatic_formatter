@@ -3,7 +3,6 @@ import re
 
 def arithmetic_arranger(problems,show=False):
 
-    strip_problem = [q.replace(' ','') for q in problems]
     split_problem = [s.split() for s in problems]
     l_operand = list()
     operator = list()
